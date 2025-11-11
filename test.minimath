@@ -1,0 +1,13 @@
+INICIO
+  def x = 10;
+  def _y = 20;
+  def palabra = 'hola mundo';
+  def α = 5;
+  def un_identificador_muy_largo = 100;
+
+  imprimir(palabra);
+  imprimir('otra cosa');
+
+  x = x + 1 * (10 / 2) - 3;
+  z = @;
+FIN;

@@ -1,0 +1,82 @@
+﻿Primera Entrega – Gramática Léxica
+Lenguaje: MiniMath
+lenguaje de programación matemático con alfabeto griego
+1. Definición del Lenguaje
+El lenguaje MiniMath cuenta con las siguientes características:
+·        Tipos de datos: entero, palabra
+·        Identificadores: Comienzan con letra o guión bajo (_), pueden contener letras, dígitos o _, con longitud máxima de 16 caracteres.
+·        Palabras reservadas: si, sino, imprimir, def, INICIO, FIN
+·        Fin de sentencia: punto y coma (;)
+·        Alfabeto: letras, letras griegas, dígitos, símbolos (= ( ) [ ] * / + - ‘ _), espacios y saltos de línea.
+2. Categorías léxicas (tokens)
+Token
+	Ejemplo
+	Expresión Regular
+	Descripción
+	Palabra reservada
+	si, sino, imprimir, def, INICIO, FIN
+	(si|sino|imprimir|def|INICIO|FIN)
+	Palabras clave del lenguaje
+	Identificador
+	x, _var1
+	([a-zA-Z][a-zA-Z0-9_]{0,15})|[Α-Ωα-ω]
+	Nombre de variables y funciones
+	Número entero
+	42, 1000
+	[0-9]+
+	Constantes enteras
+	Cadena de texto
+	‘hola’
+	‘([^’]*)’
+	Texto entre comillas simples
+	Símbolos
+	=, (, ), [, ], *, /, +, -
+	(=|\(|\)|[|]|*|/|+|-)
+	Operadores y signos de puntuación
+	Fin de sentencia
+	;
+	;
+	Indica fin de sentencia
+	Espacios
+	 , \t
+	[ \t\r]+
+	Separadores, se ignoran salvo ;
+	Apertura
+	INICIO
+	INICIO
+	Sentencia de apertura
+	Cierre
+	FIN
+	FIN
+	Sentencia final
+	3. Autómatas Finitos (AFD)
+Se definen los autómatas que reconocen las principales categorías léxicas:
+·        Identificador: q0 --[a-zA-Z_]--> q1; q1 --[a-zA-Z0-9_]--> q2...q16 (aceptadores). Error si >16 caracteres.
+q0 --[Α-Ωα-ω]--> q1
+  
+
+·        Número entero: q0 --[0-9]--> q1 (aceptador); q1 --[0-9]--> q1.
+  
+
+·        Cadena de texto: q0 --[’]--> q1; q1 --[^\"]--> q1; q1 --[’]--> qf (aceptador).
+  
+
+·        Palabras reservadas: Ejemplo "if": q0 --[i]--> q1 --[f]--> qf (aceptador).
+
+
+  
+
+  
+
+  
+
+·        Símbolos: Ejemplo "=": q0 --[=]--> qf.
+  
+
+·        Fin de sentencia: q0 --[;]--> qf.
+  
+
+Categorías Sintácticas:
+expresión = número símbolo número
+definición = palabraReservada = número
+                palabraReservada = cadenaDeTexto
