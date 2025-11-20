@@ -114,6 +114,12 @@ void yyerror(const char *s) {
 
 int main(int argc, char *argv[]) {
     extern FILE *yyin;
+
+    if (argc < 2) {
+        printf("ERROR: Se debe ingresar un archivo    /minimath [nombreArchivo.extensión]");
+        return 1;
+    }
+
     if (argc > 1) {
         yyin = fopen(argv[1], "r");
         if (!yyin) {
